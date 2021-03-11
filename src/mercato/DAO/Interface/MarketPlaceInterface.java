@@ -19,7 +19,8 @@ public interface MarketPlaceInterface {
     public boolean  UpdateProduct(Product p);
     public List<Product> ListAll();
     public Product getById(int id);
-    public Product getBySponsoredUser(SponsoredUser sp);
-    
-    
+    public List<Product> getBySponsoredUser(SponsoredUser sp);
+    public boolean deleteProduct(int id);
+    public List<Product> findMyProdByName(int i ,String nom);
+    public List<Product> findProdByName(String nom);
 }

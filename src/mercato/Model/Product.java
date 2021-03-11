@@ -5,7 +5,7 @@
  */
 package mercato.Model;
 
-import java.util.List;
+import java.sql.Date;
 
 /**
  *
@@ -20,9 +20,24 @@ public class Product {
     private String Image2;
     private String Image3;
     private String Image4;
-    private State state;
-    private ProductType pt;
+    private Date date;
+    private String state;
+    private String pt;
     private SponsoredUser sp;
+    private int quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id + ", name=" + name + ", price=" + price + ", Description=" + Description + ", Image1=" + Image1 + ", Image2=" + Image2 + ", Image3=" + Image3 + ", Image4=" + Image4 + ", date=" + date + ", state=" + state + ", pt=" + pt + ", sp=" + sp.toString() + ", quantity=" + quantity + '}';
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
     public int getId() {
         return id;
@@ -88,19 +103,19 @@ public class Product {
         this.Image4 = Image4;
     }
 
-    public State getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(State state) {
+    public void setState(String state) {
         this.state = state;
     }
 
-    public ProductType getPt() {
+    public String getPt() {
         return pt;
     }
 
-    public void setPt(ProductType pt) {
+    public void setPt(String pt) {
         this.pt = pt;
     }
 
@@ -111,6 +126,15 @@ public class Product {
     public void setSp(SponsoredUser sp) {
         this.sp = sp;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
 
     
 }

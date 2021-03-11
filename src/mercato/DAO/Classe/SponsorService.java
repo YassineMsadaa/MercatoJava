@@ -34,21 +34,7 @@ public class SponsorService implements SponsorInterface {
     private Connection db;
     public static SponsorService sponsorService = new SponsorService();
 
-    
-    
-            /* SponsoredUser su = new SponsoredUser();
-            java.util.Date dt = new java.util.Date();
-            DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-            String currentTime = sdf.format(dt);
-            Date myDate = formatter.parse(currentTime);
-            java.sql.Date sqlDate = new java.sql.Date(myDate.getTime());
-            myDate.setMonth(sqlDate.getMonth()+1);
-            java.sql.Date sqlEndDate = new java.sql.Date(myDate.getTime());
-            su.setDate(sqlDate);
-            su.setEndDate(sqlEndDate);
-            su.setStatus(Status.activated);
-            su.setType(type);*/   
+
     
     public SponsorService() {
         try {
@@ -62,11 +48,10 @@ public class SponsorService implements SponsorInterface {
 
     @Override
     public void AddSponsoredUser(SponsoredUser su) {
-        String req = "insert into sponsoreduser (date,type,status,endDate,userid) values ('" + su.getDate() + "','" + su.getType() + "','" + su.getStatus() + "','" + su.getEndDate() + "','" + su.getUser().getUserId() + "') ";
+        String req = "insert into sponsoreduser (date,type,status,endDate,userid) values ('" + su.getDate() + "','" + su.getType() + "','" + su.getStatus() + "','" + su.getEndDate() + "','" + su.getUser().getId() + "') ";
 
         Statement statement;
         try {
-            System.out.println(req);
             statement = db.createStatement();
             statement.executeUpdate(req);
 
@@ -95,11 +80,10 @@ public class SponsorService implements SponsorInterface {
     }
     @Override
     public Boolean DowngradeSponsoredUser(SponsoredUser sp) {
-        String query = "UPDATE sponsoreduser" + "SET status = " + Status.disactivated + "WHERE id = " + sp.getSponsorId() ;
+        String query = "UPDATE sponsoreduser SET status = " + Status.disactivated + "WHERE id = " + sp.getSponsorId() ;
             
            Statement statement;
         try {
-            System.out.println(query);
             statement = db.createStatement();
             statement.executeUpdate(query);
             return true;
@@ -119,7 +103,6 @@ public class SponsorService implements SponsorInterface {
       
              Statement statement;
         try {
-            System.out.println(query);
             statement = db.createStatement();
             statement.executeUpdate(query);
             return true;
@@ -157,21 +140,22 @@ public class SponsorService implements SponsorInterface {
         } catch (SQLException ex) {
             Logger.getLogger(SponsorService.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return spList;
     }
+    
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     @Override
     public SponsoredUser FindSponsoredUser(int id) {
             SponsoredUser sp = new SponsoredUser();
         try {
-            String query = "SELECT * FROM SponsoredUser WHERE id = ?";
+            String query = "SELECT * FROM SponsoredUser WHERE sponsorId = ?";
             ResultSet res;
             PreparedStatement ps;
             ps = DataBase.getInstance().getConnection().prepareStatement(query);
             ps.setInt(1, id);
             res = ps.executeQuery();
             if (res.next()) {
+                sp.setSponsorId(id);
                 sp.setDate(res.getDate("date"));
                 sp.setType(Type.valueOf(res.getString("type")));
                 sp.setUser(new ViewService().getUserById(res.getInt("userId")));
@@ -189,31 +173,6 @@ public class SponsorService implements SponsorInterface {
 
     }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-    public static void main(String args[]) throws ParseException {
-        User u = new User();
-        u.setUserId(1);
-        SponsoredUser su = new SponsoredUser();
-        java.util.Date dt = new java.util.Date();
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-        String currentTime = sdf.format(dt);
-        Date myDate = formatter.parse(currentTime);
-        java.sql.Date sqlDate = new java.sql.Date(myDate.getTime());
-        su.setDate(sqlDate);
-        su.setEndDate(sqlDate);
-        su.setStatus(Status.activated);
-        su.setType(Type.Basic);
-        su.setUser(u);
-
-        sponsorService.AddSponsoredUser(su);
-
-        for (SponsoredUser arg : sponsorService.FindAllSponsoredUser()) {
-            System.out.println(arg.getEndDate());
-        }
-
-    }
-
     @Override
     public boolean isSponsoredUser(User u) {
             SponsoredUser sp = new SponsoredUser();
@@ -222,7 +181,7 @@ public class SponsorService implements SponsorInterface {
             ResultSet res;
             PreparedStatement ps;
             ps = DataBase.getInstance().getConnection().prepareStatement(query);
-            ps.setInt(1, u.getUserId());
+            ps.setInt(1, u.getId());
             res = ps.executeQuery();
             if (res.next()) {
                 sp.setDate(res.getDate("date"));
@@ -230,19 +189,49 @@ public class SponsorService implements SponsorInterface {
                 sp.setUser(u);
                 sp.setStatus(Status.valueOf(res.getString("status")));
                 sp.setEndDate(res.getDate("endDate"));
-                
             }
             ps.close();
             res.close();
             
       return true;
-        }
-            
-            catch (SQLException ex) {
+        }catch (SQLException ex) {
             Logger.getLogger(SponsoredUser.class.getName()).log(Level.SEVERE, null, ex);
         return false; 
+        }}
+    
+        
+      @Override
+    public SponsoredUser FindByUser(int id) {
+        ViewService v = new ViewService();
+            SponsoredUser sp = new SponsoredUser();
+        try {
+            String query = "SELECT * FROM SponsoredUser WHERE userId = ?";
+            ResultSet res;
+            PreparedStatement ps;
+            ps = DataBase.getInstance().getConnection().prepareStatement(query);
+            ps.setInt(1, id);
+            res = ps.executeQuery();
+            if (res.next()) {
+                sp.setSponsorId(res.getInt("sponsorId"));
+                sp.setDate(res.getDate("date"));
+                sp.setType(Type.valueOf(res.getString("type")));
+                sp.setUser(v.getUserById(id));
+                sp.setStatus(Status.valueOf(res.getString("status")));
+                sp.setEndDate(res.getDate("endDate"));
+            }
+            ps.close();
+            res.close();
+            
+      return sp;
+        }catch (SQLException ex) {
+            Logger.getLogger(SponsoredUser.class.getName()).log(Level.SEVERE, null, ex);
+        return sp; 
         }
-           }
+        
+    }
+       
+           
+    
 
    
 

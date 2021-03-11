@@ -10,5 +10,5 @@ package mercato.Model;
  * @author PC-Yassine
  */
 public enum ProductType {
-   Equipement,clothes,consumable 
+   equipement,vetement,consommable 
 }

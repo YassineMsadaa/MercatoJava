@@ -22,6 +22,6 @@ public interface SponsorInterface {
     public List <SponsoredUser> FindAllSponsoredUser();
     public SponsoredUser FindSponsoredUser(int id);
     public boolean isSponsoredUser(User u);
-    
+    public SponsoredUser FindByUser(int id);
     
 }

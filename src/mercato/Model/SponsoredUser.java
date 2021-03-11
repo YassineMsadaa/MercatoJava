@@ -21,6 +21,11 @@ public class SponsoredUser {
     private User user;
     private Status status;
     private Date endDate;
+
+    @Override
+    public String toString() {
+        return "SponsoredUser{" + "sponsorId=" + sponsorId + ", date=" + date + ", type=" + type + ", user=" + user + ", status=" + status + ", endDate=" + endDate + '}';
+    }
     
     
 

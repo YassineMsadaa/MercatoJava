@@ -9,248 +9,277 @@ package mercato.Model;
  *
  * @author PC-Yassine
  */
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 public class User {
 
-    private int userId;
-    private String username;
-    private String email;
-    private String password;
-    private String nom;
-    private String prenom;
-    private int hight;
-    private int weight;
-    private Date datenaissance;
-    private String status;
-    private String speciality;
-    private String experience;
-    private String paysnatal;
-    private String role;
-    private String job;
-    private String sexe;
-    private String lienProfilePic;
-    private String positionSportif;
-    private String lienMedia;
-    private String lienCV;
-    private String sponsorship;
-    private int solde;
-    
-        public User() {
-        this.password = "";
-        this.username = "";
-        this.email = "";
-        this.nom = "";
-        this.prenom = "";
-        this.hight = 0;
-        this.weight = 0;
-        this.datenaissance = new Date();
-        this.status = "";
-        this.speciality = "";
-        this.experience = "";
-        this.paysnatal = "";
-        this.role = "";
-        this.job = "";
-        this.sexe = "";
-        this.lienProfilePic ="user.png";
-        this.positionSportif = "";
-        this.lienMedia = "";
-        this.lienCV = "";
-        this.sponsorship = "";
-        this.solde = 0;
+    int id ; 
+    String username ; 
+    String roles ; 
+    String password ; 
+    String email ; 
+    String name ; 
+    String last_name; 
+    Date birth_date ; 
+    String speciality ; 
+    String status ; 
+    String experience ; 
+    int hight ; 
+    int weight ; 
+    String cv ;
+    String media ; 
+    String company ;
+    String position ; 
+    String pays_natals; 
+    String sexe ; 
+    String lien_profil_pic ;
+    String sponsorship ; 
+    int solde ; 
+
+    public User(int id) {
+        this.id = id;
     }
 
-    public User(int id, String username, String email, String password, String nom, String prenom, int hight, int weight, Date datenaissance, String status, String speciality, String experience, String paysnatal, String role, String job, String sexe, String lienProfilePic, String positionSportif, String lienMedia, String lienCV, String sponsorship) {
-        this.userId = id;
+    public User(int id, String username, String roles, String password, String email, String name, String last_name, Date birth_date, String speciality, String status, String experience, int hight, int weight, String cv, String media, String company, String position, String pays_natals, String sexe, String lien_profil_pic, String sponsorship, int solde) {
+        this.id = id;
         this.username = username;
-        this.email = email;
+        this.roles = roles;
         this.password = password;
-        this.nom = nom;
-        this.prenom = prenom;
+        this.email = email;
+        this.name = name;
+        this.last_name = last_name;
+        this.birth_date = birth_date;
+        this.speciality = speciality;
+        this.status = status;
+        this.experience = experience;
         this.hight = hight;
         this.weight = weight;
-        this.datenaissance = datenaissance;
-        this.status = status;
-        this.speciality = speciality;
-        this.experience = experience;
-        this.paysnatal = paysnatal;
-        this.role = role;
-        this.job = job;
+        this.cv = cv;
+        this.media = media;
+        this.company = company;
+        this.position = position;
+        this.pays_natals = pays_natals;
         this.sexe = sexe;
-        this.lienProfilePic = lienProfilePic;
-        this.positionSportif = positionSportif;
-        this.lienMedia = lienMedia;
-        this.lienCV = lienCV;
+        this.lien_profil_pic = lien_profil_pic;
         this.sponsorship = sponsorship;
+        this.solde = solde;
     }
 
-    public int getUserId() {
-        return userId;
+    public User(int id, String username, String roles, String password, String email, String name, String last_name, Date birth_date, String speciality, String status, String experience, int hight, int weight, String cv, String media, String company, String position, String pays_natals, String sexe, String lien_profil_pic/*, String sponsorship, int solde*/) {
+        this.id = id;
+        this.username = username;
+        this.roles = roles;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.last_name = last_name;
+        this.birth_date = birth_date;
+        this.speciality = speciality;
+        this.status = status;
+        this.experience = experience;
+        this.hight = hight;
+        this.weight = weight;
+        this.cv = cv;
+        this.media = media;
+        this.company = company;
+        this.position = position;
+        this.pays_natals = pays_natals;
+        this.sexe = sexe;
+        this.lien_profil_pic = lien_profil_pic;
+        /*this.sponsorship = sponsorship;
+        this.solde = solde;*/
     }
 
-    public String getSponsorship() {
-        return sponsorship;
+    public User(){}
+    public User(String username, String roles, String password, String email, String name, String last_name, Date bitdh_date, String speciality, String status, String experience, int hight, int weight, String cv, String media, String company, String position, String pays_natals, String sexe, String lien_profil_pic) {
+        this.username = username;
+        this.roles = roles;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.last_name = last_name;
+        this.birth_date = (Date)birth_date;
+        this.speciality = speciality;
+        this.status = status;
+        this.experience = experience;
+        this.hight = hight;
+        this.weight = weight;
+        this.cv = cv;
+        this.media = media;
+        this.company = company;
+        this.position = position;
+        this.pays_natals = pays_natals;
+        this.sexe = sexe;
+        this.lien_profil_pic = lien_profil_pic;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public String getEmail() {
-        return email;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public String getNom() {
-        return nom;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public int getHight() {
-        return hight;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public Date getDatenaissance() {
-        return datenaissance;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getSpeciality() {
-        return speciality;
-    }
-
-    public String getExperience() {
-        return experience;
-    }
-
-    public String getPaysnatal() {
-        return paysnatal;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public String getSexe() {
-        return sexe;
-    }
-
-    public String getLienProfilePic() {
-        return lienProfilePic;
-    }
-
-    public String getPositionSportif() {
-        return positionSportif;
-    }
-
-    public String getLienMedia() {
-        return lienMedia;
-    }
-
-    public String getLienCV() {
-        return lienCV;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public void setSponsorship(String sponsorship) {
-        this.sponsorship = sponsorship;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getName() {
+        return name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public String getLast_name() {
+        return last_name;
     }
 
-    public void setHight(int hight) {
-        this.hight = hight;
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public Date getBirth_date() {
+        return birth_date;
     }
 
-    public void setDatenaissance(Date datenaissance) {
-        this.datenaissance = datenaissance;
+    public void setBirth_date(Date bitdh_date) {
+        this.birth_date = bitdh_date;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getSpeciality() {
+        return speciality;
     }
 
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
     public void setExperience(String experience) {
         this.experience = experience;
     }
 
-    public void setPaysnatal(String paysnatal) {
-        this.paysnatal = paysnatal;
+    public int getHight() {
+        return hight;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setHight(int hight) {
+        this.hight = hight;
     }
 
-    public void setJob(String job) {
-        this.job = job;
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public String getCv() {
+        return cv;
+    }
+
+    public void setCv(String cv) {
+        this.cv = cv;
+    }
+
+    public String getMedia() {
+        return media;
+    }
+
+    public void setMedia(String media) {
+        this.media = media;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getPays_natals() {
+        return pays_natals;
+    }
+
+    public void setPays_natals(String pays_natals) {
+        this.pays_natals = pays_natals;
+    }
+
+    public String getSexe() {
+        return sexe;
     }
 
     public void setSexe(String sexe) {
         this.sexe = sexe;
     }
 
-    public void setLienProfilePic(String lienProfilePic) {
-        this.lienProfilePic = lienProfilePic;
+    public String getLien_profil_pic() {
+        return lien_profil_pic;
     }
 
-    public void setPositionSportif(String positionSportif) {
-        this.positionSportif = positionSportif;
+    public void setLien_profil_pic(String lien_profil_pic) {
+        this.lien_profil_pic = lien_profil_pic;
     }
 
-    public void setLienMedia(String lienMedia) {
-        this.lienMedia = lienMedia;
+    public String getSponsorship() {
+        return sponsorship;
     }
 
-    public void setLienCV(String lienCV) {
-        this.lienCV = lienCV;
+    public void setSponsorship(String sponsorship) {
+        this.sponsorship = sponsorship;
     }
 
     public int getSolde() {
@@ -259,6 +288,39 @@ public class User {
 
     public void setSolde(int solde) {
         this.solde = solde;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", username=" + username + ", roles=" + roles + ", password=" + password + ", email=" + email + ", name=" + name + ", last_name=" + last_name + ", bitdh_date=" + birth_date + ", speciality=" + speciality + ", status=" + status + ", experience=" + experience + ", hight=" + hight + ", weight=" + weight + ", cv=" + cv + ", media=" + media + ", company=" + company + ", position=" + position + ", pays_natals=" + pays_natals + ", sexe=" + sexe + ", lien_profil_pic=" + lien_profil_pic + ", sponsorship=" + sponsorship + ", solde=" + solde + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.username);
+        hash = 29 * hash + Objects.hashCode(this.roles);
+        hash = 29 * hash + Objects.hashCode(this.password);
+        hash = 29 * hash + Objects.hashCode(this.email);
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Objects.hashCode(this.last_name);
+        hash = 29 * hash + Objects.hashCode(this.birth_date);
+        hash = 29 * hash + Objects.hashCode(this.speciality);
+        hash = 29 * hash + Objects.hashCode(this.status);
+        hash = 29 * hash + Objects.hashCode(this.experience);
+        hash = 29 * hash + this.hight;
+        hash = 29 * hash + this.weight;
+        hash = 29 * hash + Objects.hashCode(this.cv);
+        hash = 29 * hash + Objects.hashCode(this.media);
+        hash = 29 * hash + Objects.hashCode(this.company);
+        hash = 29 * hash + Objects.hashCode(this.position);
+        hash = 29 * hash + Objects.hashCode(this.pays_natals);
+        hash = 29 * hash + Objects.hashCode(this.sexe);
+        hash = 29 * hash + Objects.hashCode(this.lien_profil_pic);
+        hash = 29 * hash + Objects.hashCode(this.sponsorship);
+        hash = 29 * hash + this.solde;
+        return hash;
     }
 
     @Override
@@ -273,7 +335,7 @@ public class User {
             return false;
         }
         final User other = (User) obj;
-        if (this.userId != other.userId) {
+        if (this.id != other.id) {
             return false;
         }
         if (this.hight != other.hight) {
@@ -282,66 +344,66 @@ public class User {
         if (this.weight != other.weight) {
             return false;
         }
+        if (this.solde != other.solde) {
+            return false;
+        }
         if (!Objects.equals(this.username, other.username)) {
             return false;
         }
-        if (!Objects.equals(this.email, other.email)) {
+        if (!Objects.equals(this.roles, other.roles)) {
             return false;
         }
         if (!Objects.equals(this.password, other.password)) {
             return false;
         }
-        if (!Objects.equals(this.nom, other.nom)) {
+        if (!Objects.equals(this.email, other.email)) {
             return false;
         }
-        if (!Objects.equals(this.prenom, other.prenom)) {
+        if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.status, other.status)) {
+        if (!Objects.equals(this.last_name, other.last_name)) {
             return false;
         }
         if (!Objects.equals(this.speciality, other.speciality)) {
             return false;
         }
+        if (!Objects.equals(this.status, other.status)) {
+            return false;
+        }
         if (!Objects.equals(this.experience, other.experience)) {
             return false;
         }
-        if (!Objects.equals(this.paysnatal, other.paysnatal)) {
+        if (!Objects.equals(this.cv, other.cv)) {
             return false;
         }
-        if (!Objects.equals(this.role, other.role)) {
+        if (!Objects.equals(this.media, other.media)) {
             return false;
         }
-        if (!Objects.equals(this.job, other.job)) {
+        if (!Objects.equals(this.company, other.company)) {
+            return false;
+        }
+        if (!Objects.equals(this.position, other.position)) {
+            return false;
+        }
+        if (!Objects.equals(this.pays_natals, other.pays_natals)) {
             return false;
         }
         if (!Objects.equals(this.sexe, other.sexe)) {
             return false;
         }
-        if (!Objects.equals(this.lienProfilePic, other.lienProfilePic)) {
+        if (!Objects.equals(this.lien_profil_pic, other.lien_profil_pic)) {
             return false;
-        }
-        if (!Objects.equals(this.positionSportif, other.positionSportif)) {
-            return false;
-        }
-        if (!Objects.equals(this.lienMedia, other.lienMedia)) {
-            return false;
-        }
-        if (!Objects.equals(this.lienCV, other.lienCV)) {
-            return false;
-        }
-        if (!Objects.equals(this.datenaissance, other.datenaissance)) {
-            return false;    
         }
         if (!Objects.equals(this.sponsorship, other.sponsorship)) {
+            return false;
+        }
+        if (!Objects.equals(this.birth_date, other.birth_date)) {
             return false;
         }
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "User{" + "userId=" + userId + ", username=" + username + ", email=" + email + ", password=" + password + ", nom=" + nom + ", prenom=" + prenom + ", hight=" + hight + ", weight=" + weight + ", datenaissance=" + datenaissance + ", status=" + status + ", speciality=" + speciality + ", experience=" + experience + ", paysnatal=" + paysnatal + ", role=" + role + ", job=" + job + ", sexe=" + sexe + ", lienProfilePic=" + lienProfilePic + ", positionSportif=" + positionSportif + ", lienMedia=" + lienMedia + ", lienCV=" + lienCV + '}';
-    }
-        
+   
+
 }

@@ -16,8 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mercato.DAO.Interface.ViewInterface;
 import mercato.Model.SponsoredUser;
-import mercato.Model.Status;
-import mercato.Model.Type;
 import mercato.Model.User;
 import mercato.Model.View;
 import mercato.Technique.DataBase;
@@ -39,10 +37,9 @@ public class ViewService implements ViewInterface{
     
     @Override
     public boolean add(View v) {
-        String query = "insert into viewsponsor (viewid,date,sponsorid,userid,viewed) values ('" + v.getViewId()+ "','" + v.getDate()+ "','" + v.getSp().getSponsorId() + "','" + v.getUser().getUserId() + "','" + v.isViewed() + "') ";
+        String query = "insert into viewsponsor (viewid,date,sponsorid,userid,viewed) values ('" + v.getViewId()+ "','" + v.getDate()+ "','" + v.getSp().getSponsorId() + "','" + v.getUser().getId() + "','" + v.isViewed() + "') ";
         Statement statement;
         try {
-            System.out.println(query);
             statement = db.createStatement();
             statement.executeUpdate(query);
 
@@ -59,7 +56,6 @@ public class ViewService implements ViewInterface{
             
            Statement statement;
         try {
-            System.out.println(query);
             statement = db.createStatement();
             statement.executeUpdate(query);
             return true;
@@ -72,7 +68,7 @@ public class ViewService implements ViewInterface{
 
     @Override
     public List<View> getallBySponsoredUser(SponsoredUser sp) {
-               String req = "select * from view where userId="+ sp.getUser().getUserId();
+               String req = "select * from view where userId="+ sp.getUser().getId();
         List<View> vList = new ArrayList<>();
 
         Statement statement;
@@ -136,14 +132,11 @@ public class ViewService implements ViewInterface{
             ps.setInt(1, id);
             res = ps.executeQuery();
             if (res.next()) {
-                u.setUserId(id);
+                u.setId(id);
                 u.setEmail(res.getString("email"));
                 u.setUsername(res.getString("username"));
-                u.setNom(res.getString("nom"));
-                u.setPrenom(res.getString("prenom"));
-                
-           
-                
+                u.setName(res.getString("last_name"));
+                u.setLast_name(res.getString("name"));  
             }
             ps.close();
             res.close();
